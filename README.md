@@ -6,12 +6,13 @@
 
 使用的api列表：
 
-|    api    |                            url                            |         功能         |
-| :-------: | :-------------------------------------------------------: | :------------------: |
-|   teams   | https://api-football-beta.p.rapidapi.com/teams/statistics |  获取球队的基本信息  |
-|  venues   |      https://api-football-beta.p.rapidapi.com/venues      | 获取球队主场球场信息 |
-|  coaches  |      https://api-football-beta.p.rapidapi.com/coachs      |   获取球队教练信息   |
-| standings |    https://api-football-beta.p.rapidapi.com/standings     |   获取球队排名信息   |
+|     api     |                             url                             |         功能         |
+| :---------: | :---------------------------------------------------------: | :------------------: |
+|    teams    |  https://api-football-beta.p.rapidapi.com/teams/statistics  |  获取球队的基本信息  |
+|   venues    |       https://api-football-beta.p.rapidapi.com/venues       | 获取球队主场球场信息 |
+|   coaches   |       https://api-football-beta.p.rapidapi.com/coachs       |   获取球队教练信息   |
+|  standings  |     https://api-football-beta.p.rapidapi.com/standings      |   获取球队排名信息   |
+| top scorers | https://api-football-beta.p.rapidapi.com/players/topscorers |     获取球员排名     |
 
 
 
@@ -34,8 +35,6 @@
 
 
 在搜索框中输入内容时会有相关提示
-
-<img src=".\img\2.png" style="zoom:50%;" />
 
 
 
