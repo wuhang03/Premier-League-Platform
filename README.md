@@ -36,20 +36,22 @@
 
 在搜索框中输入内容时会有相关提示
 
+![](.\img\2.png)
+
 
 
 搜索得到的结果页面
 
-<img src=".\img\3.png" style="zoom:50%;" />
+<img src="./img/3.png" style="zoom:50%;" />
 
 
 
 球队榜
 
-![](.\img\4.png)
+![](./img/4.png)
 
 
 
 球员榜
 
-![](.\img\5.png)
+![](./img/5.png)
