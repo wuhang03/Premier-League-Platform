@@ -1,2 +1,19 @@
-# Premier-League-Platform
-同济大学软件学院微服务架构个人项目 简易英超联赛信息平台
+# project
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
