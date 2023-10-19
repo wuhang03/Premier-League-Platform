@@ -1,19 +1,16 @@
-# project
+##  README
 
-## Project setup
-```
-npm install
-```
+使用vue搭建的简易英超赛事信息平台，通过调用现有api的方式获取数据，没有进行后端的编写
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+包含三个主要模块： 
 
-### Compiles and minifies for production
-```
-npm run build
-```
+* 搜索模块：输入正确的球队名称，页面会跳转并显示球队及主教练信息
+* 球队模块：按照积分显示球队排名
+* 球员模板：按照进球数显示球员
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+
+
+

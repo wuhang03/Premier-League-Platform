@@ -119,7 +119,7 @@ export default {
         league: "39",
       },
       headers: {
-        "X-RapidAPI-Key": "878c7bcabemsh391866c4810b568p17944djsnf406f86467e1",
+        "X-RapidAPI-Key": "",
         "X-RapidAPI-Host": "api-football-beta.p.rapidapi.com",
       },
     };
