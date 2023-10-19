@@ -30,13 +30,13 @@
 
 主页
 
-<img src=".\img\1.png" style="zoom:50%;" />
+<img src="./img/1.png" style="zoom:50%;" />
 
 
 
 在搜索框中输入内容时会有相关提示
 
-![](.\img\2.png)
+![](./img/2.png)
 
 
 
