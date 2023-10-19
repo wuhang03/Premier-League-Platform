@@ -29,28 +29,28 @@
 
 主页
 
-<img src="F:\Vue\remote\Premier-League-Platform\src\img\1.png" style="zoom:50%;" />
+<img src=".\src\img\1.png" style="zoom:50%;" />
 
 
 
 在搜索框中输入内容时会有相关提示
 
-<img src="F:\Vue\remote\Premier-League-Platform\src\img\2.png" style="zoom:50%;" />
+<img src=".\src\img\2.png" style="zoom:50%;" />
 
 
 
 搜索得到的结果页面
 
-<img src="F:\Vue\remote\Premier-League-Platform\src\img\3.png" style="zoom:50%;" />
+<img src=".\src\img\3.png" style="zoom:50%;" />
 
 
 
 球队榜
 
-![](F:\Vue\remote\Premier-League-Platform\src\img\4.png)
+![](.\src\img\4.png)
 
 
 
 球员榜
 
-![](F:\Vue\remote\Premier-League-Platform\src\img\5.png)
+![](.\src\img\5.png)
