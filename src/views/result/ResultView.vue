@@ -42,6 +42,10 @@
                 <b>地 址：</b>
                 {{ address }}
               </span>
+              <span class="wid150">
+                <b>全欧排名：</b>
+                {{ ranking }}
+              </span>
             </p>
           </div>
         </div>
@@ -49,7 +53,7 @@
 
       <div class="team-right">
         <div class="info-left">
-          <div class="name">{{coach}}</div>
+          <div class="name">{{ coach }}</div>
           <div class="detail-info">
             <ul>
               <li>
@@ -66,16 +70,55 @@
               </li>
             </ul>
           </div>
-          <img
-            :src="avatar"
-            alt=""
-          />
+          <img :src="avatar" alt="" />
         </div>
       </div>
     </div>
-    
-    <div class="venueimage">
-      <img :src="venueimg" alt="">
+
+    <div class="under">
+      <el-card shadow="hover">
+        <h1>城市</h1>
+        <el-divider></el-divider>
+        <div class="showBlock">
+          <p class="address">{{ this.city }}</p>
+
+          <div class="other">
+            <p class="wind">
+              <span>维度: {{ this.latitude }} </span>
+            </p>
+            <p class="humidity">
+              经度: {{ this.longitude }}
+            </p>
+            <p id="reporttime">人口: {{ this.population }}</p>
+          </div>
+        </div>
+      </el-card>
+      <div class="venueimage">
+        <img :src="venueimg" alt="" />
+      </div>
+      <el-card shadow="hover">
+        <h1>天气</h1>
+        <el-divider></el-divider>
+        <div class="showBlock">
+          <p class="address">{{ address }}</p>
+          <p class="temperature">
+            <span class="weather">
+              {{ temp }} ℃
+              <span><i class="mainWeather" :class="getIcon"></i></span>
+            </span>
+          </p>
+
+          <div class="other">
+            <p class="wind">
+              <span>风速: {{ wind }} kph</span>
+            </p>
+            <p class="humidity">
+              <i class="el-icon-odometer"></i> 湿度: {{ humidity }}
+            </p>
+            <p id="reporttime">消息发布时间: {{ localtime }}</p>
+          </div>
+        </div>
+      </el-card>
     </div>
     <Footer></Footer>
   </div>
@@ -92,6 +135,7 @@ export default {
   },
   data() {
     return {
+      rankingData: [],
       loading: false,
       searchTerm: "",
       name: "",
@@ -103,18 +147,30 @@ export default {
       address: "",
       id: "",
 
-      coach:"",
-      nation:"",
-      age:"",
+      coach: "",
+      nation: "",
+      age: "",
       avatar: "",
 
-      venueimg:"",
+      venueimg: "",
+
+      weathericon: "",
+      temp: "",
+      humidity: "",
+      wind: "",
+      localtime: "",
+
+      population: "",
+      latitude: "",
+      longitude: "",
+
+      ranking: "",
     };
-   
   },
   created() {
     this.searchTerm = this.$route.query.searchTerm;
     this.fetchTeam();
+    this.fetchRankings();
   },
   methods: {
     async fetchTeam() {
@@ -148,6 +204,36 @@ export default {
         this.venueimg = info.venue.image;
         this.loading = true;
         this.fetchCoach();
+        this.fetchWeather();
+        this.fetchCity();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async fetchCity() {
+      const axios = require("axios");
+
+      const options = {
+        method: "GET",
+        url: "https://city-by-api-ninjas.p.rapidapi.com/v1/city",
+        params: {
+          name: this.city,
+          limit: "1",
+        },
+        headers: {
+          "X-RapidAPI-Key":
+            "878c7bcabemsh391866c4810b568p17944djsnf406f86467e1",
+          "X-RapidAPI-Host": "city-by-api-ninjas.p.rapidapi.com",
+        },
+      };
+
+      try {
+        const response = await axios.request(options);
+        this.population = response.data[0].population;
+        this.latitude = response.data[0].latitude;
+        this.longitude = response.data[0].longitude;
+        console.log(this.population);
       } catch (error) {
         console.error(error);
       }
@@ -155,14 +241,13 @@ export default {
 
     async fetchCoach() {
       const axios = require("axios");
-      console.log(this.id);
       const getCoach = {
         method: "GET",
         url: "https://api-football-beta.p.rapidapi.com/coachs",
         params: { team: this.id },
         headers: {
           "X-RapidAPI-Key":
-            "",
+            "878c7bcabemsh391866c4810b568p17944djsnf406f86467e1",
           "X-RapidAPI-Host": "api-football-beta.p.rapidapi.com",
         },
       };
@@ -173,6 +258,62 @@ export default {
         this.age = coach.age;
         this.avatar = coach.photo;
         this.nation = coach.birth.country;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async fetchWeather() {
+      const axios = require("axios");
+      
+      const options = {
+        method: "GET",
+        url: "https://weatherapi-com.p.rapidapi.com/current.json",
+        params: { q: this.city },
+        headers: {
+          "X-RapidAPI-Key":
+            "878c7bcabemsh391866c4810b568p17944djsnf406f86467e1",
+          "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
+        },
+      };
+
+      try {
+        const response = await axios.request(options);
+        const current = response.data.current;
+        const location = response.data.location;
+        this.temp = current.temp_c;
+        this.humidity = current.humidity;
+        this.wind = current.wind_kph;
+        this.weathericon = current.condition.icon;
+        this.localtime = location.localtime;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async fetchRankings() {
+      const axios = require("axios");
+      const options = {
+        method: "GET",
+        url: "https://footapi7.p.rapidapi.com/api/rankings/uefa/clubs",
+        headers: {
+          "X-RapidAPI-Key":
+            "878c7bcabemsh391866c4810b568p17944djsnf406f86467e1",
+          "X-RapidAPI-Host": "footapi7.p.rapidapi.com",
+        },
+      };
+
+      try {
+        const response = await axios.request(options);
+        const rankings = response.data.rankings;
+        let length = 100;
+        for (let i = 0; i < length; i++) {
+          console.log(rankings[i].rowName);
+          if(this.searchTerm.includes(rankings[i].rowName)){
+            this.ranking = i+1;
+            break;
+          }
+        }
       } catch (error) {
         console.error(error);
       }
@@ -293,12 +434,72 @@ b {
 }
 .team-con .team-right .info-left img {
   float: right;
-  width: 130px;
+  width: 100px;
   height: auto;
   vertical-align: top;
 }
-.venueimage{
+
+.under {
+  display: flex;
+  justify-content: space-between;
+}
+.under .venueimage {
   height: auto;
-  width: 600px;
+  width: 800px;
+  margin-left: 0;
+}
+
+.under .el-card {
+  background-color: white ;
+  height: 450px;
+  color: #000;
+  margin-right: 100px;
+  width: 300px;
+}
+
+.under h1 {
+  margin: 0px 0px 10px 10px;
+}
+
+.under .showBlock {
+  margin-top: 10px;
+}
+
+.under .temperature {
+  font-size: 50px;
+}
+
+.under .weather {
+  margin-left: 20px;
+  font-size: 35px;
+}
+
+.under .address {
+  font-size: 20px;
+}
+
+.under .other {
+  margin-top: 10px;
+}
+
+.under .other p {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.under #reporttime {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.under .mainWeather {
+  float: right;
+  margin-top: 10px;
+  margin-right: 10%;
+  font-size: 120px;
+}
+
+.under .showBlock {
+  margin-left: 10px;
 }
 </style>

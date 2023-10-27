@@ -78,8 +78,7 @@ export default {
       console.log(this.input);
       this.search();
     },
-    onInfoBoxClick(event) {
-    }
+    onInfoBoxClick(event) {},
   },
   mounted: async function () {
     const axios = require("axios");
@@ -92,7 +91,7 @@ export default {
         league: "39",
       },
       headers: {
-        "X-RapidAPI-Key": "",
+        "X-RapidAPI-Key": "630fcae455msh4e70829c2d25e94p105a05jsn55eca3b18e02",
         "X-RapidAPI-Host": "api-football-beta.p.rapidapi.com",
       },
     };
@@ -101,7 +100,6 @@ export default {
       const response = await axios.request(options);
       let length = response.data.response[0].league.standings[0].length;
       const array = response.data.response[0].league.standings[0];
-      // console.log(array);
       for (let i = 0; i < length; i++) {
         this.teamData.push(array[i].team.name);
       }
@@ -128,40 +126,35 @@ export default {
     width: 100%;
     top: 50%;
     z-index: 99;
-
-    .title {
-      margin: 200 auto;
-      font-size: 40px;
-      color: white;
-      font-weight: 700;
-      text-shadow: 0 5px 5px rgb(0 0 0 / 10%);
-      text-align: center;
-    }
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
     .input {
       display: flex;
       width: 500px;
       margin: 0 auto;
-      left: 300px;
     }
-  }
-}
-.list {
-  background-color: white;
-  width: 430px;
-  height: 100px;
-  position: absolute;
-  left: 310px;
-  border-radius: 5px;
-  box-sizing: border-box;
-  padding: 20px;
-  .hot-teams {
-    font-size: 14px;
-    color: #999;
-    position: absolute;
-    top: 0;
-    margin-top: 10px;
-    padding-left: 0;
-    list-style: none;
+    .list {
+      background-color: white;
+      width: 430px;
+      height: 100px;
+      position: absolute;
+      left: 310px;
+      top: 40px;
+      margin: 0 auto;
+      border-radius: 5px;
+      box-sizing: border-box;
+      padding-top: 20px;
+      .hot-teams {
+        font-size: 14px;
+        color: #999;
+        position: absolute;
+        top: 0;
+        margin-top: 10px;
+        padding-left: 10px;
+        list-style: none;
+      }
+    }
   }
 }
 </style>
